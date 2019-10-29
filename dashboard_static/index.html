@@ -16,12 +16,7 @@
 
 <link rel="stylesheet" href="/style/layout.css"/>
 <link rel="stylesheet" href="/style/theme.css"/>
-
-
-
-
-
-
+<link rel="stylesheet" href="/style/wordcloud.css"/>
 <script src="/lib/jquery.flot.min.js"></script>
 <script src="/lib/core.js"></script>
 <script src="/lib/charts.js"></script>
@@ -52,7 +47,7 @@
     opacity: 0;
 }
 </style>
-<body class='container_12'>
+<body  style="overflow:hidden" class='container_12'>
 	<div class="container-fluid">
 		<div class="row">
 			
@@ -71,7 +66,7 @@
 					</ul>
 					<div id="visuals">
 						<div class="Geolocation">
-						    <h1>Geolocation</h1>
+						    <h2>Geolocation</h2>
 						    <p>
 						    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis sapien in ornare dictum. Ut ultricies fermentum massa, non egestas nisl ornare ut. Integer lacus mi, sodales sit amet leo at, posuere tempor felis. Fusce ligula ipsum, varius sed laoreet eu, ultricies vitae nunc. Nam vitae convallis quam. Integer turpis.
 						    </p>
@@ -82,10 +77,11 @@
 						    <p>
 						    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis sapien in ornare dictum. Ut ultricies fermentum massa, non egestas nisl ornare ut. Integer lacus mi, sodales sit amet leo at, posuere tempor felis. Fusce ligula ipsum, varius sed laoreet eu, ultricies vitae nunc. Nam vitae convallis quam. Integer turpis.
 						    </p>
+							<div id="wolk" class="grid_8 vert_8"></div>
 						    </div>
 						    
 						<div class="Graph">
-						    <h3>Graph</h3>
+						    <h2>Graph</h2>
 							<div id="graph" class="grid_8 vert_8"></div>
 						    </div>
 					</div>
@@ -126,7 +122,7 @@
 <script>
 // create a rolling chart block
 	block('#graph').rolling_chart({
-		memory: 150,
+		memory: 50,
 		chart: {
 			yaxis: {
 				min: -100,
@@ -142,7 +138,7 @@
 	events.connect('activity', '#graph');
 
 	block('#tweet').tweets({
-		memory: 50000	
+		memory: 50	
 	});
 	events.connect('tweet','#tweet');
 
@@ -150,6 +146,14 @@
 		memory: 200	
 	});
 	events.connect('importanttweet','#importanttweet');
+
+	block('#wolk').wordcloud({
+		memory: 30,
+		filter_function: function(cat, val, max) {
+		   return val >= 20; // do not display words seen less than 3 times
+		}
+	});
+	events.connect('woordwolk', '#wolk');
 </script>
 </body>
 
