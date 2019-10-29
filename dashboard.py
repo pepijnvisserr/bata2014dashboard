@@ -4,6 +4,8 @@ from eca.generators import start_offline_tweets
 import random
 import datetime
 import textwrap
+import pprint
+import re
 
 ## You might have to update the root path to point to the correct path
 ## (by default, it points to <rules>_static)
@@ -14,9 +16,12 @@ import textwrap
 # the action will be called with the context and the event
 @event('init')
 def setup(ctx, e):
-    ctx.counttweets = 0
-    fire('activity')
-    start_offline_tweets('data/bata_2014.txt', time_factor=100000000)
+	ctx.counttweets = 0
+	fire('activity')
+	start_offline_tweets('data/bata_2014.txt', time_factor=100000)
+	start_offline_tweets('data/bata_2014.txt','woordwolk', time_factor=100000)
+	ctx.words = {}
+
 
 
 # define a normal Python function
@@ -29,7 +34,7 @@ def generate_sample(ctx, e):
     
 
 	# base sample on previous one
-	sample = clip(0, ctx.counttweets, 400)
+	sample = clip(0, ctx.counttweets, 1000)
 	# emit to outside world
 	if (sample == 0):
 		sample = 0.0000000000001
@@ -41,8 +46,32 @@ def generate_sample(ctx, e):
 
 	ctx.counttweets = 0
 	# chain event
-	fire('activity', delay=2)
+	fire('activity', delay=1)
 
+# simple word splitter
+pattern = re.compile('\W+')
+
+# sample stopword list, needs to be much more sophisticated
+stopwords = ['het', 'een', 'aan', 'zijn', 'http', 'www', 'com', 'ben', 'jij']
+
+def words(message):
+    result = pattern.split(message)
+    result = map(lambda w: w.lower(), result)
+    result = filter(lambda w: w not in stopwords, result)
+    result = filter(lambda w: len(w) > 2, result)
+    return result
+
+
+@event('woordwolk')
+def wolk(ctx, e):
+    # we receive a tweet
+    tweet = e.data
+
+    for w in words(tweet['text']):
+        emit('woordwolk', {
+            'action': 'add',
+            'value': (w, 1)
+        })
 
 
 @event('chirp')
@@ -66,10 +95,11 @@ def echo(ctx,e):
 	ctx.counttweets += 1
 	emit('tweet', e.data)
 	tweetdata = e.data
-	announcenames = {"Batavierenrace", "Overijssel_", "GelderlandNieuw"}
+	announcenames = {"Batavierenrace", "Overijssel_", "GelderlandNieuw", "UTNieuws"}
 	goodname = False
 	for y in announcenames:
 		if tweetdata['user']['screen_name'] == y:
+		#if  tweetdata['text'].find('kanker') != -1:
 			goodname = True
 
 	if tweetdata['user']['verified'] or goodname:
