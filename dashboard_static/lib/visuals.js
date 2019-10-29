@@ -41,5 +41,17 @@ $(document).ready(function(){
     
     $("#darkmode").click(function(){
             $("*").toggleClass("darkmode");
+            var current = $("#darkmode").attr("src");
+            var swap = $("#darkmode").attr("data-swap");     
+            $("#darkmode").attr('src', swap).attr("data-swap",current);
+            current = $("#sort").attr("src");
+            swap = $("#sort").attr("data-swap");  
+            $("#sort").attr('src', swap).attr("data-swap",current);
+            current = $("#filter").attr("src");
+            swap = $("#filter").attr("data-swap");  
+            $("#filter").attr('src', swap).attr("data-swap",current);
+            current = $("#settings").attr("src");
+            swap = $("#settings").attr("data-swap");  
+            $("#settings").attr('src', swap).attr("data-swap",current);
     });
 });
