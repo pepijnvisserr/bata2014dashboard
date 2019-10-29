@@ -93,17 +93,17 @@
 				<div class="container">
 					<h3>Tweets</h3>
 					<a>
-						<i class="fas fa-filter"></i>
+						<img src="filter.png"  data-swap="filterwhite.png" height="32" width="32" id="filter" align="right"/>
 					</a>
 					
 					<a>
-						<i class="fas fa-sort"></i>
+						<img src="sort.png"  data-swap="sortwhite.png" height="32" id="sort" width="20" align="right"/>
 					</a>
 					
 					<a>
-						<i class="fas fa-cog"></i>
+						<img src="settings.png"  data-swap="settingswhite.png" id="settings" height="32" width="32" align="right"/>
 					</a>
-					<a id="darkmode" href="#">DARK MODE</a>
+						<img src="switchoff.png" data-swap="switchon.png" height="32" width="32" id="darkmode" href="#" align="right"/>
 
 						<div id="tweet" class="grid_8 vert_7"></div>
 						<h2>Announcements</h2>
@@ -143,14 +143,14 @@
 	events.connect('tweet','#tweet');
 
 	block('#importanttweet').tweets({
-		memory: 200	
+		memory: 20	
 	});
 	events.connect('importanttweet','#importanttweet');
 
 	block('#wolk').wordcloud({
 		memory: 30,
 		filter_function: function(cat, val, max) {
-		   return val >= 20; // do not display words seen less than 3 times
+		   return val >= 20; // do not display words seen less than 20 times
 		}
 	});
 	events.connect('woordwolk', '#wolk');
