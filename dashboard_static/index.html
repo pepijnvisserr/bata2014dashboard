@@ -36,10 +36,10 @@
     background: #0d0d0d;
     color: #e6e6e6;
     border-color: #e6e6e6;
-    -webkit-transition: all 0.25s ease;
+    /* -webkit-transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
-    transition: all 0.25s ease;
+    transition: all 0.25s ease; */
 }
 .invisible {
     width: 0;
@@ -137,6 +137,7 @@
 	// connect sample event to graph
 	events.connect('activity', '#graph');
 
+
 	block('#tweet').tweets({
 		memory: 50	
 	});
@@ -146,6 +147,7 @@
 		memory: 20	
 	});
 	events.connect('importanttweet','#importanttweet');
+
 
 	block('#wolk').wordcloud({
 		memory: 30,

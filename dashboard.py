@@ -93,14 +93,20 @@ def tweet(ctx, e):
 @event('tweet')
 def echo(ctx,e):
 	ctx.counttweets += 1
-	emit('tweet', e.data)
+	
 	tweetdata = e.data
 	announcenames = {"Batavierenrace", "Overijssel_", "GelderlandNieuw", "UTNieuws"}
+	badwords = {"kut","godver","godverdomme","tering","tyfus","hoer","tyfus","homo","flikker","motherfucker","sukkel","klootzak","mogool","mongool","lul","penis","vagina","bitch","slet","neger","nigger","nigga","fuck"}
 	goodname = False
+	swearword = False
 	for y in announcenames:
 		if tweetdata['user']['screen_name'] == y:
 		#if  tweetdata['text'].find('kanker') != -1:
 			goodname = True
-
-	if tweetdata['user']['verified'] or goodname:
+	for x in badwords:
+		if  tweetdata['text'].find(x) > -1:
+			swearword = True
+	if (swearword == False):
+		emit('tweet', e.data)
+	if (tweetdata['user']['verified'] or goodname) and swearword == False:
 		emit('importanttweet', tweetdata)
