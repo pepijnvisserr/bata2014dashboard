@@ -17,11 +17,11 @@ import re
 @event('init')
 def setup(ctx, e):
 	ctx.counttweets = 0
+	ctx.allhashtags = []
+	ctx.hashtagscounts = []
 	fire('activity')
-	start_offline_tweets('data/bata_2014.txt', time_factor=100000)
-	start_offline_tweets('data/bata_2014.txt','woordwolk', time_factor=100000)
+	start_offline_tweets('data/bata_2014.txt', time_factor=1000000)
 	ctx.words = {}
-
 
 
 # define a normal Python function
@@ -61,39 +61,12 @@ def words(message):
     result = filter(lambda w: len(w) > 2, result)
     return result
 
-
-@event('woordwolk')
-def wolk(ctx, e):
-    # we receive a tweet
-    tweet = e.data
-
-    for w in words(tweet['text']):
-        emit('woordwolk', {
-            'action': 'add',
-            'value': (w, 1)
-        })
-
-
-@event('chirp')
-def tweet(ctx, e):
-    # we receive a tweet
-    tweet = e.data
-
-    # parse date
-    time = datetime.datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S %z %Y')
-
-    # nicify text
-    text = textwrap.fill(tweet['text'],initial_indent='    ', subsequent_indent='    ')
-
-    # generate output
-    output = "[{}] {} (@{}):\n{}".format(time, tweet['user']['name'], tweet['user']['screen_name'], text)
-    emit('chirp', output)
-
-
 @event('tweet')
 def echo(ctx,e):
+
+	#TWEETS AND ANNOUNCEMENTS
 	ctx.counttweets += 1
-	
+    
 	tweetdata = e.data
 	announcenames = {"Batavierenrace", "Overijssel_", "GelderlandNieuw", "UTNieuws"}
 	badwords = {"kut","godver","godverdomme","tering","tyfus","hoer","tyfus","homo","flikker","motherfucker","sukkel","klootzak","mogool","mongool","lul","penis","vagina","bitch","slet","neger","nigger","nigga","fuck"}
@@ -110,3 +83,33 @@ def echo(ctx,e):
 		emit('tweet', e.data)
 	if (tweetdata['user']['verified'] or goodname) and swearword == False:
 		emit('importanttweet', tweetdata)
+
+	#HASHTAGS
+	hashtagdatas = tweetdata['entities']['hashtags']
+	if hashtagdatas != []:
+		for h in hashtagdatas:
+			if h['text'].lower() not in ctx.allhashtags:
+				ctx.allhashtags.append(h['text'].lower())
+				ctx.hashtagscounts.append((h['text'].lower(),1))
+			else:
+				i = 0
+				for y in ctx.hashtagscounts:
+					if y[0] == h['text'].lower():
+						ctx.hashtagscounts.append((h['text'].lower(),y[1] + 1))
+						ctx.hashtagscounts.remove(y)
+				i+= 1
+		ctx.hashtagscounts.sort(key=lambda tup: tup[1])
+		ctx.hashtagscounts.reverse()
+		tophashtags = ctx.hashtagscounts[0:10]
+		tophashtags.reverse()
+		for h in tophashtags:
+			emit('importanthashtags', h)
+
+	#WORDCLOUD
+	tweet = e.data
+
+	for w in words(tweet['text']):
+		emit('woordwolk', {
+			'action': 'add',
+			'value': (w, 1)
+	})
