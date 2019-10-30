@@ -162,3 +162,23 @@ pre {
 .button {
 	cursor:pointer
 }
+
+.hashtagdiv {
+    border: 1px solid black;
+    margin-bottom: 0;
+    background-color: #e2fdff;
+    width: 500px;
+    padding: 10px;
+    height: 70px;
+    padding-top: 0px;
+}
+.hashtagamount {
+	color: grey;
+    font-size: 1em;
+}
+
+.hashtagp {
+	color: black;
+    margin-bottom: 0;
+    font-size: 1.5em;
+}

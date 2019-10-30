@@ -28,6 +28,8 @@
 <script src="/lib/jquery.flot.categories.min.js"></script>
 <script src="/lib/jquery.flot.pie.js"></script>
 <script src="/lib/visuals.js"></script>
+<script src="/lib/hashtags.js"></script>
+
 
 </head>
 
@@ -36,10 +38,10 @@
     background: #0d0d0d;
     color: #e6e6e6;
     border-color: #e6e6e6;
-    /* -webkit-transition: all 0.25s ease;
+    -webkit-transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
-    transition: all 0.25s ease; */
+    transition: all 0.25s ease;
 }
 .invisible {
     width: 0;
@@ -63,6 +65,9 @@
 					  <li class="nav-item">
 						<a id="btn_graph" class="nav-link" href="#">Graph</a>
 					  </li>
+					  <li class="nav-item">
+						<a id="btn_other" class="nav-link" href="#">Other</a>
+					  </li>
 					</ul>
 					<div id="visuals">
 						<div class="Geolocation">
@@ -84,6 +89,11 @@
 						    <h2>Graph</h2>
 							<div id="graph" class="grid_8 vert_8"></div>
 						    </div>
+						<div class="Other">
+							<div id="hashtags">
+							<h2>Most used hashtags</h2>
+							</div>
+						    </div>
 					</div>
 				</div>
 				
@@ -103,7 +113,7 @@
 					<a>
 						<img src="settings.png"  class="button" data-swap="settingswhite.png" id="settings" height="32" width="32" align="right"/>
 					</a>
-						<img src="switchoff.png" class="button" data-swap="switchon.png" height="32" width="32" id="darkmode" href="#" align="right"/>
+						<img src="darkbutton.png" class="button" data-swap="lightbutton.png" height="32" width="32" id="darkmode" href="#" align="right"/>
 
 						<div id="tweet" class="grid_8 vert_7"></div>
 						<h2>Announcements</h2>
@@ -137,7 +147,6 @@
 	// connect sample event to graph
 	events.connect('activity', '#graph');
 
-
 	block('#tweet').tweets({
 		memory: 50	
 	});
@@ -148,7 +157,6 @@
 	});
 	events.connect('importanttweet','#importanttweet');
 
-
 	block('#wolk').wordcloud({
 		memory: 30,
 		filter_function: function(cat, val, max) {
@@ -156,6 +164,12 @@
 		}
 	});
 	events.connect('woordwolk', '#wolk');
+
+	block('#hashtags').hashtags({
+		memory: 10
+	});
+
+	events.connect('importanthashtags', '#hashtags')
 </script>
 </body>
 
