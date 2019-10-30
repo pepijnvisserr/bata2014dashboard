@@ -11,7 +11,7 @@ $(document).ready(function(){
             $("#graph").removeClass("grid_8 vert_8");
             //$("#geolocation").removeClass("grid_8 vert_4");
 
-            $("*li.nav-item a").removeClass("active");
+            $(".nav-link").removeClass("active");
             $(this).addClass("active");
     });
     
@@ -23,7 +23,7 @@ $(document).ready(function(){
             $("#graph").removeClass("grid_8 vert_8");
             //$("#geolocation").addClass("grid_8 vert_4");
 
-            $("*li.nav-item a").removeClass("active");
+            $(".nav-link").removeClass("active");
             $(this).addClass("active");
     });
     
@@ -35,7 +35,7 @@ $(document).ready(function(){
             $("#graph").addClass("grid_8 vert_8");
             //$("#geolocation").removeClass("grid_8 vert_4");
 
-            $("*li.nav-item a").removeClass("active");
+            $(".nav-link").removeClass("active");
             $(this).addClass("active");
     });
     
