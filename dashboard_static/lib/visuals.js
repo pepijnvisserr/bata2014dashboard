@@ -1,6 +1,9 @@
 var dmode = false;
 
 $(document).ready(function(){
+	var audio = {};
+	audio["noti"] = new Audio();
+	audio["noti"].src = "notification.mp3"
     
 	$("#visuals > div").addClass("invisible");
     $(".Graph").removeClass("invisible");
@@ -64,11 +67,24 @@ $(document).ready(function(){
 		$("#settings").attr('src', swap).attr("data-swap",current);
     });
 
-    $("body").on('DOMSubtreeModified','#tweet',function() {
-    	if(dmode) {
-	        $("#tweet div").addClass("darkmode");
-	    }
+	$("#notification").click(function(){
+	    if(smode == true) {
+			smode = false;
+		}
+        else if(smode == false) {
+			smode = true;
+		}
+		var current = $("#notification").attr("src");
+		var swap = $("#notification").attr("data-swap");     
+		$("#notification").attr('src', swap).attr("data-swap",current);
     });
+
+    $("body").on('DOMSubtreeModified','#tweet',function() {
+		if(smode) {
+			audio["noti"].pause();
+			audio["noti"].currentTime = 0;
+			audio["noti"].play();
+		}
 
     $("body").on('DOMSubtreeModified','#importanttweet',function() {
     	if(dmode) {
