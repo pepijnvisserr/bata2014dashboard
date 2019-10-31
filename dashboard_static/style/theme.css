@@ -182,3 +182,22 @@ pre {
     margin-bottom: 0;
     font-size: 1.5em;
 }
+.locationdiv {
+    border: 1px solid black;
+    margin-bottom: 0;
+    background-color: #f5cbd7;
+    width: 500px;
+    padding: 10px;
+    height: 70px;
+    padding-top: 0px;
+}
+.locationamount {
+	color: grey;
+    font-size: 1em;
+}
+
+.locationp {
+	color: black;
+    margin-bottom: 0;
+    font-size: 1.5em;
+}

@@ -1,5 +1,5 @@
 (function($, block) {
-
+$id = 0;
 // Entity formatters for use by tweet list
 var entity_formatters = {
     'urls': function(e) {
@@ -100,7 +100,12 @@ block.fn.tweets = function(config) {
 
         // Build timestamp:
         var $time = $('<small class="time"></small>');
-        $time.append($('<span>' + tweet.created_at + '</span>'));
+		$loc = tweet.user.location;
+		if ($loc == "") {
+			$time.append($('<span>' + tweet.created_at + '</span>'));
+		} else {
+		    $time.append($('<span>' + tweet.user.location + ' at ' + tweet.created_at + '</span>'));
+		}
 
         $header.append($time);
         $content.append($header);
@@ -113,7 +118,10 @@ block.fn.tweets = function(config) {
         // Build outer structure of containing divs:
         $tweet.append($content);
         $item.append($tweet);
-        
+		$id += 1;
+		var $invisvalues = $('<span class="favorite_count" style="display:none">' + tweet.favorite_count + '</span><span class="lang" style="display:none">' + tweet.lang + '</span><span class="loc" style="display:none">' + tweet.user.location + '</span><span class="retweet_count" style="display:none">' + tweet.retweet_count + '</span><span class="id" style="display:none">' + $id + '</span>');
+        $item.append($invisvalues);
+
         // place new tweet in front of list 
         $list.prepend($item);
 
