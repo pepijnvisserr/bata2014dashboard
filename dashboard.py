@@ -22,7 +22,7 @@ def setup(ctx, e):
 	ctx.alllocations = []
 	ctx.locationcounts = []
 	fire('activity')
-	start_offline_tweets('data/bata_2014.txt', time_factor=1000000)
+	start_offline_tweets('data/bata_2014.txt', time_factor=100000)
 	ctx.words = {}
 
 
