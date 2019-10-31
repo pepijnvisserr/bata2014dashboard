@@ -89,9 +89,7 @@ block.fn.tweets = function(config) {
         // Build a tag image and header:
         var $account = $('<a class="account-group"></a>');
         $account.attr("href", "http://twitter.com/" + tweet.user.screen_name);
-
-        var $avatar = $("<img>").addClass("avatar");
-        $avatar.attr("src", tweet.user.profile_image_url);
+        var $avatar = $('<object class="avatar" data=' + tweet.user.profile_image_url +' type="image/png"><img class="avatar" src="standardicon.png" style="margin-left:0;margin-top:0;">');
         $account.append($avatar);
         $account.append($('<strong class="fullname">' + tweet.user.name + '</strong>'));
         $account.append($('<span>&nbsp;</span>'));
