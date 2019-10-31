@@ -14,11 +14,10 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="icon" href="twitter.gif" type="image/gif"/>
-
 <link rel="stylesheet" href="/style/layout.css"/>
 <link rel="stylesheet" href="/style/theme.css"/>
 <link rel="stylesheet" href="/style/wordcloud.css"/>
+<link rel="icon" href="twitter.gif" type="image/gif"/>
 <script src="/lib/jquery.flot.min.js"></script>
 <script src="/lib/core.js"></script>
 <script src="/lib/charts.js"></script>
@@ -32,6 +31,7 @@
 <script src="/lib/visuals.js"></script>
 <script src="/lib/hashtags.js"></script>
 <script src="/lib/locations.js"></script>
+<script src="/lib/filter.js"></script>
 
 
 </head>
@@ -50,6 +50,10 @@
     width: 0;
     height: 0;
     opacity: 0;
+}
+
+.filtered {
+	display:none;
 }
 </style>
 <body  style="overflow:hidden" class='container_12'>
@@ -102,19 +106,65 @@
 			<div class="col col-4">
 				<div class="container">
 					<h3>Tweets</h3>
-					<a>
+					<button data-toggle="collapse" data-target="#filterdrop">
 						<img src="filter.png" class="button" data-swap="filterwhite.png" height="32" width="32" id="filter" align="right"/>
-					</a>
+					</button>
 					
-					<a>
-						<img src="sort.png" class="button"  data-swap="sortwhite.png" height="32" id="sort" width="20" align="right"/>
-					</a>
-					
-					<a>
-						<img src="settings.png"  class="button" data-swap="settingswhite.png" id="settings" height="32" width="32" align="right"/>
-					</a>
-						<img src="darkbutton.png" class="button" data-swap="lightbutton.png" height="32" width="32" id="darkmode" href="#" align="right"/>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal">
+					  <img src="settings.png"  class="button" data-swap="settingswhite.png" id="settings" height="32" width="32" align="right"/>
+					</button>
 
+					<!-- Modal -->
+					<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						  <div class="modal-body">
+							<div>
+								Darkmode:
+								<img src="switchoff.png" class="button" data-swap="switchon.png" height="32" width="32" id="darkmode" href="#" align="right"/>
+							</div>
+							Font-size:
+							<input type="text" class="input-sm form-control" align="right" style="width: 10%; float: right">
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-primary">Save changes</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+						
+
+						<div id="filterdrop" class="collapse">
+							<div class="input-group mb-3">
+							  <input class="field1"></input>
+							  <select class="custom-select field2" id="inputGroupSelect01">
+								<option selected value="0">All</option>
+								<option value="1">Content</option>
+								<option value="2">Hashtag</option>
+								<option value="3">Author</option>
+							  </select>
+							  <div class="input-group-append">
+								<button class="filter btn btn-primary">Filter</button>
+							  </div>
+							</div>
+							
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<label class="input-group-text" for="inputGroupSelect01">Sort on:</label>
+							  </div>
+							  <select class="custom-select" id="inputGroupSelect01">
+								<option selected value="1">Time</option>
+								<option value="2">Retweets</option>
+								<option value="3">Favorites</option>
+							  </select>
+							</div>
+						</div>
 						<div id="tweet" class="grid_8 vert_7"></div>
 						<h2>Announcements</h2>
 						<div id="importanttweet" class="grid_8 vert_3"></div>
