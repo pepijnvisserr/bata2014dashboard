@@ -1,31 +1,22 @@
 var dmode = false;
 
 $(document).ready(function(){
-    $("#visuals div").addClass("invisible");
-    $(".Wordcloud").removeClass("invisible");
-    $(".Wordcloud div").removeClass("invisible");
+    
+	$("#visuals > div").addClass("invisible");
+    $(".Graph").removeClass("invisible");
+    $(".Graph div").removeClass("invisible");
+	$("#wolk").css("display","none");
+    $("#graph").addClass("grid_8 vert_8");
 
     $("#btn_cloud").click(function(){ 
         $("#visuals > div").addClass("invisible");
             $(".Wordcloud").removeClass("invisible");
             $(".Wordcloud div").removeClass("invisible");
+			$("#wolk").css("display","block");
             $("#wolk").addClass("grid_8 vert_8");
             $("#graph").removeClass("grid_8 vert_8");
-            //$("#geolocation").removeClass("grid_8 vert_4");
-
             $(".nav-link").removeClass("active");
-            $(this).addClass("active");
-    });
-    
-    $("#btn_geo").click(function(){
-        $("#visuals > div").addClass("invisible");
-            $(".Geolocation").removeClass("invisible");
-            $(".Geolocation div").removeClass("invisible");
-            $("#wolk").removeClass("grid_8 vert_8");
-            $("#graph").removeClass("grid_8 vert_8");
-            //$("#geolocation").addClass("grid_8 vert_4");
 
-            $(".nav-link").removeClass("active");
             $(this).addClass("active");
     });
     
@@ -35,7 +26,6 @@ $(document).ready(function(){
             $(".Graph div").removeClass("invisible");
             $("#wolk").removeClass("grid_8 vert_8");
             $("#graph").addClass("grid_8 vert_8");
-            //$("#geolocation").removeClass("grid_8 vert_4");
 
             $(".nav-link").removeClass("active");
             $(this).addClass("active");
@@ -46,7 +36,6 @@ $(document).ready(function(){
             $(".Other div").removeClass("invisible");
             $("#wolk").removeClass("grid_8 vert_8");
             $("#graph").removeClass("grid_8 vert_8");
-            //$("#geolocation").addClass("grid_8 vert_4");
 
             $(".nav-link").removeClass("active");
             $(this).addClass("active");

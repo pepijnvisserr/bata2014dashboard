@@ -29,6 +29,7 @@
 <script src="/lib/jquery.flot.pie.js"></script>
 <script src="/lib/visuals.js"></script>
 <script src="/lib/hashtags.js"></script>
+<script src="/lib/locations.js"></script>
 
 
 </head>
@@ -56,42 +57,39 @@
 			<div class="col col-8">
 				<div class="container-fluid">
 					<ul class="nav nav-tabs">
-					  <li class="nav-item">
-						<a id="btn_cloud" class="nav-link active" href="#">Wordcloud</a>
+					<li class="nav-item">
+						<a id="btn_graph" class="nav-link active" href="#">Graph</a>
 					  </li>
 					  <li class="nav-item">
-						<a id="btn_geo" class="nav-link" href="#">Geolocation</a>
-					  </li>
-					  <li class="nav-item">
-						<a id="btn_graph" class="nav-link" href="#">Graph</a>
+						<a id="btn_cloud" class="nav-link" href="#">Wordcloud</a>
 					  </li>
 					  <li class="nav-item">
 						<a id="btn_other" class="nav-link" href="#">Other</a>
 					  </li>
 					</ul>
 					<div id="visuals">
-						<div class="Geolocation">
-						    <h2>Geolocation</h2>
-						    <p>
-						    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis sapien in ornare dictum. Ut ultricies fermentum massa, non egestas nisl ornare ut. Integer lacus mi, sodales sit amet leo at, posuere tempor felis. Fusce ligula ipsum, varius sed laoreet eu, ultricies vitae nunc. Nam vitae convallis quam. Integer turpis.
-						    </p>
-						    </div>
 						    
 						<div class="Wordcloud">
 						    <h2>Wordcloud</h2>
-						    <p>
-						    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis sapien in ornare dictum. Ut ultricies fermentum massa, non egestas nisl ornare ut. Integer lacus mi, sodales sit amet leo at, posuere tempor felis. Fusce ligula ipsum, varius sed laoreet eu, ultricies vitae nunc. Nam vitae convallis quam. Integer turpis.
-						    </p>
 							<div id="wolk" class="grid_8 vert_8"></div>
 						    </div>
-						    
 						<div class="Graph">
 						    <h2>Graph</h2>
 							<div id="graph" class="grid_8 vert_8"></div>
 						    </div>
 						<div class="Other">
-							<div id="hashtags">
-							<h2>Most used hashtags</h2>
+							<div id="top stuff">
+							
+							<table>
+							  <tr>
+								<th><h2>Top Hashtags</h2></th>
+								<th><h2>Top Locations</h2></th>
+							  </tr>
+							  <tr>
+								<td id="hashtags"></td>
+								<td id="locations"></td>
+							  </tr>
+							</table>
 							</div>
 						    </div>
 					</div>
@@ -170,6 +168,12 @@
 	});
 
 	events.connect('importanthashtags', '#hashtags')
+
+	block('#locations').locations({
+		memory: 10
+	});
+
+	events.connect('toplocations', '#locations')
 </script>
 </body>
 

@@ -19,6 +19,8 @@ def setup(ctx, e):
 	ctx.counttweets = 0
 	ctx.allhashtags = []
 	ctx.hashtagscounts = []
+	ctx.alllocations = []
+	ctx.locationcounts = []
 	fire('activity')
 	start_offline_tweets('data/bata_2014.txt', time_factor=1000000)
 	ctx.words = {}
@@ -104,6 +106,26 @@ def echo(ctx,e):
 		tophashtags.reverse()
 		for h in tophashtags:
 			emit('importanthashtags', h)
+
+	#LOCATIONS
+	locationdata = tweetdata['user']['location']
+	if locationdata != [] and locationdata != "":
+		if locationdata.lower() not in ctx.alllocations:
+			ctx.alllocations.append(locationdata.lower())
+			ctx.locationcounts.append((locationdata.lower(),1))
+		else:
+			i = 0
+			for y in ctx.locationcounts:
+				if y[0] == locationdata.lower():
+					ctx.locationcounts.append((locationdata.lower(),y[1] + 1))
+					ctx.locationcounts.remove(y)
+			i+= 1
+		ctx.locationcounts.sort(key=lambda tup: tup[1])
+		ctx.locationcounts.reverse()
+		toplocations = ctx.locationcounts[0:10]
+		toplocations.reverse()
+		for h in toplocations:
+			emit('toplocations', h)
 
 	#WORDCLOUD
 	tweet = e.data
