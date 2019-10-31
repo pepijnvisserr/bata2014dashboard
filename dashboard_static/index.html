@@ -142,17 +142,37 @@
 
 						<div id="filterdrop" class="collapse">
 							<div class="input-group mb-3">
-							  <input class="field1"></input>
-							  <select class="custom-select field2" id="inputGroupSelect01">
-								<option selected value="0">All</option>
-								<option value="1">Content</option>
-								<option value="2">Hashtag</option>
-								<option value="3">Author</option>
-							  </select>
-							  <div class="input-group-append">
-								<button class="filter btn btn-primary">Filter</button>
+							  <div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Author</span>
 							  </div>
+							  <input id="field1" type="text" class="form-control" placeholder="For example 'Rik'" aria-label="Username" aria-describedby="basic-addon1">
 							</div>
+							  
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Location</span>
+							  </div>
+							  <input id="field2" type="text" class="form-control" placeholder="For example 'Enschede'" aria-label="Username" aria-describedby="basic-addon1">
+							</div>
+							
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Content</span>
+							  </div>
+							  <input id="field3" type="text" class="form-control" placeholder="For example 'Race'" aria-label="Username" aria-describedby="basic-addon1">
+							</div>
+							
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+								<label class="input-group-text" for="inputGroupSelect01">Language</label>
+							  </div>
+							  <select id="field4" class="custom-select" id="inputGroupSelect01">
+								<option selected value="">All...</option>
+								<option value="nl">Dutch</option>
+								<option value="en">English</option>
+							  </select>
+							</div>
+							<button type="button" class="filterbtn btn btn-primary btn-lg btn-block">Filter</button>	
 							
 							<div class="input-group mb-3">
 							  <div class="input-group-prepend">
@@ -165,6 +185,7 @@
 							  </select>
 							</div>
 						</div>
+						
 						<div id="tweet" class="grid_8 vert_7"></div>
 						<h2>Announcements</h2>
 						<div id="importanttweet" class="grid_8 vert_3"></div>

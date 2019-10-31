@@ -75,4 +75,18 @@ $(document).ready(function(){
 	        $("#importanttweet div").addClass("darkmode");
 	    }
     });
+	
+	$("body").on('DOMSubtreeModified','#hashtags',function() {
+        if(dmode) {
+            $(".hashtagdiv").addClass("darkmode");
+            $(".hashtagp").addClass("darkmode");
+        }
+    });
+
+    $("body").on('DOMSubtreeModified','#locations',function() {
+        if(dmode) {
+            $(".locationdiv").addClass("darkmode");
+            $(".locationp").addClass("darkmode");
+        }
+    });
 });
