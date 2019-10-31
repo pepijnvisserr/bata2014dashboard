@@ -1,9 +1,9 @@
 var dmode = false;
-var smode = false;
+
 $(document).ready(function(){
 	var audio = {};
 	audio["noti"] = new Audio();
-	audio["noti"].src = "notification.mp3";
+	audio["noti"].src = "notification.mp3"
     
 	$("#visuals > div").addClass("invisible");
     $(".Graph").removeClass("invisible");
@@ -51,7 +51,7 @@ $(document).ready(function(){
 		}
         else if(dmode == false) {
 			dmode = true;
-			$("*").addClass("darkmode");
+			$("*:not(#graph,#graph *)").addClass("darkmode");
 		}
 		var current = $("#darkmode").attr("src");
 		var swap = $("#darkmode").attr("data-swap");     
@@ -85,10 +85,6 @@ $(document).ready(function(){
 			audio["noti"].currentTime = 0;
 			audio["noti"].play();
 		}
-		if(dmode) {
-	        $("#tweet div").addClass("darkmode");
-	    }
-    });
 
     $("body").on('DOMSubtreeModified','#importanttweet',function() {
     	if(dmode) {
