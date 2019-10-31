@@ -1,5 +1,6 @@
 var dmode = false;
 var smode = false;
+
 $(document).ready(function(){
 	var audio = {};
 	audio["noti"] = new Audio();
@@ -51,7 +52,7 @@ $(document).ready(function(){
 		}
         else if(dmode == false) {
 			dmode = true;
-			$("*").addClass("darkmode");
+			$("*:not(#graph,#graph *)").addClass("darkmode");
 		}
 		var current = $("#darkmode").attr("src");
 		var swap = $("#darkmode").attr("data-swap");     
