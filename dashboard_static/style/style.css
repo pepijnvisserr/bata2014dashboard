@@ -1,0 +1,35 @@
+#visuals {
+	border: 1px solid #dee2e6;
+	border-top: 0px;
+	display: block;
+	height: 93vh;
+	padding: 1em;
+	overflow: hidden;
+}
+
+#tweetcontainer {
+	border: 1px solid #dee2e6;
+	display: block;
+	height: 93vh;
+	padding: 1em;
+	margin-top: 42;
+	overflow: hidden;
+}
+
+#tweetcontainer>div{
+	width: 100%;
+	margin-left: 0;margin-right: 0;
+}
+
+.filtercontainer {
+	margin-top: 2em;
+}
+
+table {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.other {
+	overflow: auto;
+}

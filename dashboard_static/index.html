@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="/style/layout.css"/>
 <link rel="stylesheet" href="/style/theme.css"/>
 <link rel="stylesheet" href="/style/wordcloud.css"/>
+<link rel="stylesheet" href="/style/style.css"/>
 <link rel="icon" href="twitter.gif" type="image/gif"/>
 <script src="/lib/jquery.flot.min.js"></script>
 <script src="/lib/core.js"></script>
@@ -56,12 +57,12 @@
 	display:none;
 }
 </style>
-<body  style="overflow:hidden" class='container_12'>
-	<div class="container-fluid">
+<body  style="overflow:hidden">
+	<div class="container-fluid" style="margin-top: 0.5em">
 		<div class="row">
 			
-			<div class="col col-8">
-				<div class="container-fluid">
+			<div class="col col-md-7 col-xs-12">
+				<div class="container-fluid container_12" >
 					<ul class="nav nav-tabs">
 					<li class="nav-item">
 						<a id="btn_graph" class="nav-link active" href="#">Graph</a>
@@ -73,14 +74,14 @@
 						<a id="btn_other" class="nav-link" href="#">Other</a>
 					  </li>
 					</ul>
-					<div id="visuals">
-						    
+					<div id="visuals">	    
 						<div class="Wordcloud">
 						    <h2>Wordcloud</h2>
+							<p>This is a wordcloud consisting of the most used words in tweets. How big the word is has to do with how many times it has been used</p>
 							<div id="wolk" class="grid_8 vert_8"></div>
 						    </div>
 						<div class="Graph">
-						    <h2>Graph</h2>
+						    <h2>Activity Graph</h2>
 							<div id="graph" class="grid_8 vert_8"></div>
 						    </div>
 						<div class="Other">
@@ -97,22 +98,33 @@
 							  </tr>
 							</table>
 							</div>
-						    </div>
+						</div>
 					</div>
 				</div>
 				
 			</div>
 			
-			<div class="col col-4">
-				<div class="container">
-					<h3>Tweets</h3>
-					<button data-toggle="collapse" data-target="#filterdrop">
-						<img src="filter.png" class="button" data-swap="filterwhite.png" height="32" width="32" id="filter" align="right"/>
-					</button>
+			<div class="col col-md-5 col-xs-12">
+				<div class="container container_12" id="tweetcontainer">
+					<div class="row">
+						<div class="col-sm-9">
+							<h3>Tweets</h3>
+						</div>
+						
+						<div class="col-sm-3">
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#filterdrop">
+								<img src="filter.png" class="button" data-swap="filterwhite.png" height="32" width="32" id="filter" align="right"/>
+							</button>
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#settingsModal">
+								<img src="settings.png"  class="button" data-swap="settingswhite.png" id="settings" height="32" width="32" align="right"/>
+							</button>
+						</div>
+						</div>
+					</div>
 					
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal">
-					  <img src="settings.png"  class="button" data-swap="settingswhite.png" id="settings" height="32" width="32" align="right"/>
-					</button>
+					
+					
 
 					<!-- Modal -->
 					<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -134,10 +146,13 @@
 								<img src="switchoff.png" class="button" data-swap="switchon.png" height="24" width="24" id="notification" href="#" align="right"/>
 							</div>
 							Font-size:
-							<input type="text" class="input-sm form-control" align="right" style="width: 10%; float: right">
-						  </div>
-						  <div class="modal-footer">
-							<button type="button" class="btn btn-primary">Save changes</button>
+							<select id="fontsize">
+								<option value="75%">75%</option>
+								<option value="100%" selected>100%</option>
+								<option value="125%">125%</option>
+								<option value="150%">150%</option>
+								<option value="200%">200%</option>
+							</select> 
 						  </div>
 						</div>
 					  </div>
@@ -145,56 +160,64 @@
 						
 
 						<div id="filterdrop" class="collapse">
-							<div class="input-group mb-3">
-							  <div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">Author</span>
-							  </div>
-							  <input id="field1" type="text" class="form-control" placeholder="For example 'Rik'" aria-label="Username" aria-describedby="basic-addon1">
+							<div class="filtercontainer container-fluid">
+								<strong>Filter:</strong>
+								<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Author</span>
+								  </div>
+								  <input id="field1" type="text" class="form-control" placeholder="For example 'Rik'" aria-label="Username" aria-describedby="basic-addon1">
+								</div>
+								  
+								<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Location</span>
+								  </div>
+								  <input id="field2" type="text" class="form-control" placeholder="For example 'Enschede'" aria-label="Username" aria-describedby="basic-addon1">
+								</div>
+								
+								<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Content</span>
+								  </div>
+								  <input id="field3" type="text" class="form-control" placeholder="For example 'Race'" aria-label="Username" aria-describedby="basic-addon1">
+								</div>
+								
+								<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Language</label>
+								  </div>
+								  <select id="field4" class="custom-select" id="inputGroupSelect01">
+									<option selected value="">All...</option>
+									<option value="nl">Dutch</option>
+									<option value="en">English</option>
+								  </select>
+								</div>
+								<button type="button" class="filterbtn btn btn-primary btn-lg btn-block">Filter</button>	
 							</div>
-							  
-							<div class="input-group mb-3">
-							  <div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">Location</span>
-							  </div>
-							  <input id="field2" type="text" class="form-control" placeholder="For example 'Enschede'" aria-label="Username" aria-describedby="basic-addon1">
+							<!--
+							<div class="container-fluid filtercontainer">
+								<strong>Sort</strong>
+								<div class="input-group mb-3">
+								  <div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Sort on:</label>
+								  </div>
+								  <select class="custom-select" id="inputGroupSelect01">
+									<option selected value="1">Time</option>
+									<option value="2">Retweets</option>
+									<option value="3">Favorites</option>
+								  </select>
+								</div>
+								<button type="button" class="filterbtn btn btn-primary btn-lg btn-block">Filter</button>	
 							</div>
-							
-							<div class="input-group mb-3">
-							  <div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">Content</span>
-							  </div>
-							  <input id="field3" type="text" class="form-control" placeholder="For example 'Race'" aria-label="Username" aria-describedby="basic-addon1">
-							</div>
-							
-							<div class="input-group mb-3">
-							  <div class="input-group-prepend">
-								<label class="input-group-text" for="inputGroupSelect01">Language</label>
-							  </div>
-							  <select id="field4" class="custom-select" id="inputGroupSelect01">
-								<option selected value="">All...</option>
-								<option value="nl">Dutch</option>
-								<option value="en">English</option>
-							  </select>
-							</div>
-							<button type="button" class="filterbtn btn btn-primary btn-lg btn-block">Filter</button>	
-							
-							<div class="input-group mb-3">
-							  <div class="input-group-prepend">
-								<label class="input-group-text" for="inputGroupSelect01">Sort on:</label>
-							  </div>
-							  <select class="custom-select" id="inputGroupSelect01">
-								<option selected value="1">Time</option>
-								<option value="2">Retweets</option>
-								<option value="3">Favorites</option>
-							  </select>
-							</div>
+							-->
 						</div>
 						
-						<div id="tweet" class="grid_8 vert_7"></div>
+						<div id="tweet" class="grid_7 vert_5"></div>
 						<h2>Announcements</h2>
-						<div id="importanttweet" class="grid_8 vert_3"></div>
+						<div id="importanttweet" class="grid_7 vert_3"></div>
 
-						<div id="importantpeeps" class="grid_8 vert_3">
+						<div id="importantpeeps" class="grid_7 vert_3">
 							<div id="person"></div>
 							<div id="person"></div>
 							<div id="person"></div>
