@@ -2,6 +2,7 @@ var dmode = false;
 var smode = false;
 
 $(document).ready(function(){
+	
 	var audio = {};
 	audio["noti"] = new Audio();
 	audio["noti"].src = "notification.mp3";
@@ -110,4 +111,65 @@ $(document).ready(function(){
             $(".locationp").addClass("darkmode");
         }
     });
+	
+	$("#fontsize").change(function(){
+        var value = $(this).find("option:selected").attr("value");
+        
+        switch (value){
+            case "75%":
+            $('*').css('font-size', '95%')
+            $('.container_12').css('font-size','')
+            $('.container_12 div').css('font-size','')
+            $('.container_12 div div').css('font-size','')
+            $('.container_12 div div div').css('font-size','')
+            $('.container_12 div div div div').css('font-size','')
+                
+            break;
+        }
+		
+		switch (value){
+            case "100%":
+            $('*').css('font-size', '100%')
+            $('.container_12').css('font-size','')
+            $('.container_12 div').css('font-size','')
+            $('.container_12 div div').css('font-size','')
+            $('.container_12 div div div').css('font-size','')
+            $('.container_12 div div div div').css('font-size','')
+            break;
+        }
+        
+        switch (value){
+            case "125%":
+            $('*').css('font-size', '103%')
+            $('.container_12').css('font-size','')
+            $('.container_12 div').css('font-size','')
+            $('.container_12 div div').css('font-size','')
+            $('.container_12 div div div').css('font-size','')
+            $('.container_12 div div div div').css('font-size','')
+            break;
+        }
+        
+        switch (value){
+            case "150%":
+            $('*').css('font-size', '105%')
+            $('.container_12').css('font-size','')
+            $('.container_12 div').css('font-size','')
+            $('.container_12 div div').css('font-size','')
+            $('.container_12 div div div').css('font-size','')
+            $('.container_12 div div div div').css('font-size','')
+            break;
+        }
+        
+        switch (value){
+            case "200%":
+            $('*').css('font-size', '110%')
+            $('.container_12').css('font-size','')
+            $('.container_12 div').css('font-size','')
+            $('.container_12 div div').css('font-size','')
+            $('.container_12 div div div').css('font-size','')
+            $('.container_12 div div div div').css('font-size','')
+            break;
+        }
+    });
+		
 });

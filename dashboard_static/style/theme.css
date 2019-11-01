@@ -167,8 +167,8 @@ pre {
     border: 1px solid black;
     margin-bottom: 0;
     background-color: #e2fdff;
-    width: 500px;
     padding: 10px;
+	width: 22em;
     height: 70px;
     padding-top: 0px;
 }
@@ -186,7 +186,7 @@ pre {
     border: 1px solid black;
     margin-bottom: 0;
     background-color: #f5cbd7;
-    width: 500px;
+	width: 22em;
     padding: 10px;
     height: 70px;
     padding-top: 0px;
