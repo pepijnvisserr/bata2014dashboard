@@ -213,7 +213,7 @@
 							-->
 						</div>
 						
-						<div id="tweet" class="grid_7 vert_5"></div>
+						<div id="tweet" class="grid_7 vert_7"></div>
 						<h2>Announcements</h2>
 						<div id="importanttweet" class="grid_7 vert_3"></div>
 
@@ -246,7 +246,7 @@
 	events.connect('activity', '#graph');
 
 	block('#tweet').tweets({
-		memory: 50	
+		memory: 20	
 	});
 	events.connect('tweet','#tweet');
 
@@ -275,6 +275,8 @@
 
 	events.connect('toplocations', '#locations')
 </script>
+<div id="revenge" style="bottom: 0px; left: 0px; height: 100px; width: 100px; cursor: pointer; position: absolute;">
+</div>
 </body>
 
 </html>

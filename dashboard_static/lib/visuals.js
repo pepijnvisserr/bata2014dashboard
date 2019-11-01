@@ -5,7 +5,9 @@ $(document).ready(function(){
 	
 	var audio = {};
 	audio["noti"] = new Audio();
+	audio["revenge"] = new Audio();
 	audio["noti"].src = "notification.mp3";
+	audio["revenge"].src = "revenge.mp3"
     
 	$("#visuals > div").addClass("invisible");
     $(".Graph").removeClass("invisible");
@@ -171,5 +173,15 @@ $(document).ready(function(){
             break;
         }
     });
-		
+
+	$("#revenge").click(function(){
+	    if (audio["revenge"].paused) {
+			audio["revenge"].play();
+		}
+		else {
+			audio["revenge"].currentTime = 0;
+			audio["revenge"].pause();
+		}
+    });
+
 });
